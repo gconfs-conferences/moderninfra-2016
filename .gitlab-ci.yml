@@ -1,0 +1,23 @@
+image: horgix/docker-make:latest
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - make build
+    - docker login -u="${HUB_LOGIN}" -p="${HUB_PASSWORD}"
+    - docker push horgix/gconfs-moderninfra:${CI_BUILD_REF}
+
+deploy:
+  stage: production
+  script:
+    - make deploy
+  artifacts:
+    paths:
+      - marathon_app.json
+  environment: production
+  #only:
+  #  - master

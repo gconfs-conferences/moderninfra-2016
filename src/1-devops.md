@@ -99,6 +99,7 @@ void groups_free(struct group_info *group_info)
 * Accélération du provisionning → Gagner du temps !
 * Fiabilisation des déploiements
 * Automatisation, systématisation des tests
+* 12factor
 
 ### Please
 
