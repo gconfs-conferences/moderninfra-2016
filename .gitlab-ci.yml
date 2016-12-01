@@ -12,7 +12,7 @@ build:
     - docker push horgix/gconfs-moderninfra:${CI_BUILD_REF}
 
 deploy:
-  stage: production
+  stage: deploy
   script:
     - make deploy
   artifacts:
