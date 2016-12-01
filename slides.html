@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Alexis Horgix Chotard" />
+  <title>Modern infrastructure, automation, whales and stuff</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Modern infrastructure, automation, whales and stuff</h1>
+    <h2 class="author">Alexis “Horgix” Chotard</h2>
+    <h3 class="date">01 décembre 2016</h3>
+</section>
+<section id="TOC">
+<ul>
+<li><a href="#/introduction">Introduction</a></li>
+<li><a href="#/devops">DevOps</a></li>
+<li><a href="#/testingci">Testing/CI</a></li>
+<li><a href="#/automatisation">Automatisation</a></li>
+<li><a href="#/level-0---ssh">Level 0 - SSH</a></li>
+<li><a href="#/level-1---automation">Level 1 - Automation</a></li>
+<li><a href="#/level-2---cloud">Level 2 - Cloud</a></li>
+<li><a href="#/level-3---infrastructure-immutable">Level 3 - Infrastructure immutable</a></li>
+<li><a href="#/level-4---docker">Level 4 - Docker</a></li>
+<li><a href="#/conclusion">Conclusion</a></li>
+</ul>
+</section>
+
+<section><section id="introduction" class="titleslide slide level1"><h1>Introduction</h1></section><section id="buzzwords" class="slide level3">
+<h1>Buzzwords</h1>
+<ul>
+<li><strong>DevOps</strong> (DevOups)</li>
+<li><strong>Cloud</strong> (à ce qu’il paraît on dit “Nuage”)</li>
+<li><strong>Big Data</strong> (au moins 1000)</li>
+<li><strong>Blockchain</strong> (« Bleauquechêne »)</li>
+<li><strong>Green IT</strong> (en vrai, c’est déjà hasbeen)</li>
+</ul>
+</section><section id="pourquoi-cette-conf" class="slide level3">
+<h1>Pourquoi cette conf</h1>
+<ul>
+<li>En vrai l’admin sys c’est intéressant</li>
+<li>On m’a dit qu’il y aurait des bières mais c’est faux</li>
+<li>Afin que vous puissiez vous aussi dormir pendant que votre infra fait sa vie</li>
+</ul>
+</section></section>
+<section><section id="devops" class="titleslide slide level1"><h1>DevOps</h1></section><section id="syndrômes" class="slide level3">
+<h1>Syndrômes</h1>
+<ul>
+<li>« Je teste en prod, c’est plus rapide »</li>
+<li>« Coucou cher admin sys, tu peux me mettre en prod la tarball que je t’ai envoyé par mail et qui segfault dès que tu lances le binaire ? »</li>
+<li>« Les devs sont nuls »</li>
+<li>« Les admin sys font chier »</li>
+<li>« Oui on fait du DevOps, on a installé un Jenkins »</li>
+</ul>
+</section><section id="cest-quoi-en-vrai" class="slide level3">
+<h1>C’est quoi en vrai</h1>
+<ul>
+<li>Problème organisationel avant d’être technique</li>
+<li>Culture</li>
+<li>Agile</li>
+<li>Vous voulez des détails ?</li>
+</ul>
+</section><section id="prérequis" class="slide level3">
+<h1>Prérequis</h1>
+<ul>
+<li>Equipe de gestion de l’infra en interne (ops)</li>
+<li>Développeurs en interne (devs)</li>
+<li>Managers prêts à évoluer !</li>
+<li>Projet !</li>
+</ul>
+</section><section id="problématiques" class="slide level3">
+<h1>Problématiques</h1>
+<ul>
+<li>Equipes ops/dev séparées</li>
+<li>Manque de communication</li>
+<li>Over-process</li>
+<li>Manque de confiance du métier en l’IT</li>
+</ul>
+</section><section id="code" class="slide level3">
+<h1>Code</h1>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">void</span> groups_free(<span class="kw">struct</span> group_info *group_info)
+{
+        <span class="kw">if</span> (group_info-&gt;blocks[<span class="dv">0</span>] != group_info-&gt;small_block) {
+                <span class="dt">int</span> i;
+                <span class="kw">for</span> (i = <span class="dv">0</span>; i &lt; group_info-&gt;nblocks; i++)
+                        free_page((<span class="dt">unsigned</span> <span class="dt">long</span>)group_info-&gt;blocks[i]);
+        }
+        kfree(group_info);
+}</code></pre></div>
+</section><section id="livraison" class="slide level3">
+<h1>Livraison</h1>
+<ul>
+<li>Testing, en local, côté dev (quand vous avez de la chance)</li>
+<li>Devs (prérequis + code packagé) → ops</li>
+<li>“Mise en prod” par les ops</li>
+</ul>
+</section><section id="et-si-ça-ne-marche-pas" class="slide level3">
+<h1>Et si ça ne marche pas ?</h1>
+<ul>
+<li>Retour aux devs
+<ul>
+<li>Manque d’infos</li>
+<li>Délais</li>
+<li>Rejet de la faute</li>
+<li>Perte de confiance</li>
+</ul></li>
+<li>Restart du process</li>
+</ul>
+<p>“And again, and again, and again…”</p>
+</section><section id="objectifsbénéfices" class="slide level3">
+<h1>Objectifs/Bénéfices</h1>
+<ul>
+<li>Réduction des cycles de livraison (automatisation)</li>
+<li>Amélioration de la qualité (CI, tests, metrics)</li>
+<li>Nouvelle culture (amélioration basée sur l’apprentissage continu)</li>
+</ul>
+</section><section id="vision-positive-de-léchec" class="slide level3">
+<h1>Vision positive de l’échec</h1>
+<ul>
+<li>Fail fast</li>
+<li>Anticipation</li>
+</ul>
+<blockquote>
+<p>I have not failed. I’ve just found 10,000 ways that won’t work. – Thomas A. Edison</p>
+</blockquote>
+</section><section id="comment" class="slide level3">
+<h1>Comment ?</h1>
+<ul>
+<li>Rapprochement des équipes :
+<ul>
+<li>Métier</li>
+<li>Ops</li>
+<li>Devs</li>
+</ul></li>
+<li>Centralisation des outils</li>
+<li>Promotion systématiques des valeurs précédentes :
+<ul>
+<li>Partage</li>
+<li>Confiance</li>
+<li>Amélioration continue</li>
+<li>Partage des responsabilités</li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="testingci" class="titleslide slide level1"><h1>Testing/CI</h1></section><section id="en-pratique" class="slide level3">
+<h1>En pratique</h1>
+<ul>
+<li>Iso prod → ça marche en preprod → c’est safe, go live</li>
+</ul>
+<p><strong>Mais :</strong></p>
+<p>La stratégie de recette et de tests :</p>
+<ul>
+<li>… est rarement partagée</li>
+<li>… n’est pas toujours définie clairement</li>
+<li>… n’est pas toujours ni rigoureusement respectée</li>
+</ul>
+<p>→ nuit à la crédibilité du résultat</p>
+</section><section id="challenges" class="slide level3">
+<h1>Challenges :</h1>
+<ul>
+<li>Avoir les outils</li>
+<li>Obtenir des environnements ISO prod dans des délais raisonnables</li>
+<li><p>Garantir l’intégrité des tests et des résultats rapides</p></li>
+<li>Une collaboration qui fonctionne ne doit pas être mise en péril par une agrandissement de l’équipe ou un changement des personnes impliquées</li>
+<li><p>Structuration du processus autour de l’automatisation → créer un cadre dans lequel on pourra inclure les nouveaux arrivants</p></li>
+</ul>
+</section><section class="slide level3">
+
+</section></section>
+<section><section id="automatisation" class="titleslide slide level1"><h1>Automatisation</h1></section><section id="problématique-initiale" class="slide level3">
+<h1>Problématique initiale</h1>
+<ul>
+<li>Processus rarement définis</li>
+<li>Chacun garde son bout de process dans un coin pour le faire évoluer comme il veut</li>
+</ul>
+</section><section id="objectifs" class="slide level3">
+<h1>Objectifs</h1>
+<ul>
+<li>Accélération du provisionning → Gagner du temps !</li>
+<li>Fiabilisation des déploiements</li>
+<li>Automatisation, systématisation des tests</li>
+</ul>
+</section><section id="définition" class="slide level3">
+<h1>Définition</h1>
+<p>Automatiser ≠ optimiser</p>
+<ul>
+<li>Rendre systématique</li>
+<li>… à l’aide d’outils technologiques</li>
+<li>… un <strong>enchainement d’activités</strong> spécifiques</li>
+<li>Pas forcément optimisé ou industrialisé !</li>
+</ul>
+<p>ENSUITE : identifier et enlever les étapes inutiles et optimiser la chaine d’activités pour tendre vers du continuous delivery</p>
+</section><section id="tâches-concernées" class="slide level3">
+<h1>Tâches concernées</h1>
+<ul>
+<li>Tâches répétitives à faible valeur ajoutée</li>
+<li><p>Tâches plus complexes techniquement, succeptibles d’introduire des erreurs d’innatention !</p></li>
+<li>Notion même de valeur ajoutée qui peut faire l’objet d’un débat !</li>
+<li>Personne n’aime voir son travail dévalorisé</li>
+<li><p>→ définition complexe</p></li>
+</ul>
+</section><section class="slide level3">
+
+<p>Tâches les plus pénibles :</p>
+<ul>
+<li>Chronophages</li>
+<li>Sans intérêt intellectuel particulier</li>
+<li>Complexes et éprouvantes</li>
+</ul>
+<p>→ Tâches susceptibles de générer des erreurs et de générer de la tension entre les partenaires. Ex : mise en prod (CF Hosting)</p>
+</section><section id="accelerated-delivery" class="slide level3">
+<h1>Accelerated delivery</h1>
+<ul>
+<li>Accélération du Time To Market</li>
+<li>Accélération des résolutions d’incidents (MTTR, Mean Time To Repair)</li>
+<li>Industrialisation des déploiements</li>
+</ul>
+</section><section id="please" class="slide level3">
+<h1>Please</h1>
+<p>As a dev :</p>
+<ul>
+<li>Follow what you code until it’s live and working as expected</li>
+<li>Talk to your Ops <em>before</em> the start of the project, and <em>during</em> it</li>
+</ul>
+<p>As an ops :</p>
+<ul>
+<li>Listen to what the devs want</li>
+<li>Make their life easy : if it isn’t, they will bypass you</li>
+</ul>
+</section></section>
+<section><section id="level-0---ssh" class="titleslide slide level1"><h1>Level 0 - SSH</h1></section><section id="concept" class="slide level3">
+<h1>Concept</h1>
+<ul>
+<li>…</li>
+<li>man</li>
+<li>NOOOO</li>
+</ul>
+</section></section>
+<section><section id="level-1---automation" class="titleslide slide level1"><h1>Level 1 - Automation</h1></section><section id="why" class="slide level3">
+<h1>Why</h1>
+<p>Common admin task like changing a configuration are easy: just SSH on the server, modify it, and it’s done !</p>
+<p>… but what about it when you have 20 hosts ? 200 ? 2000 ?</p>
+<ul>
+<li><strong>20</strong> : ok. You’ll do it by hand. With errors, for sure</li>
+<li><strong>200</strong> : uh. You’ll write a small shell wrapper and spend hours writing checks to see it fail anyway</li>
+<li><strong>2000</strong> : ok, either I’m quitting my job or we hire an intern</li>
+</ul>
+</section><section id="philosophy" class="slide level3">
+<h1>Philosophy</h1>
+<ul>
+<li>Stop doing everything by hand; describe it in <strong>text files</strong> instead</li>
+<li>Define infrastructure “as code”</li>
+<li>Manage “<strong>states</strong>” of “<strong>resources</strong>” representing a “<strong>service</strong>”</li>
+<li>Add an abstraction layer between infrastructure and its administrator</li>
+</ul>
+</section><section id="the-big-picture" class="slide level3">
+<h1>The big picture</h1>
+<ul>
+<li>A server knows :
+<ul>
+<li>an <strong>inventory</strong> composed of managed machines</li>
+<li><strong>environment</strong>-specifics parameters (network, names, …)</li>
+<li><strong>configurations</strong> description</li>
+</ul></li>
+<li>The server and its client connect together</li>
+<li>The client applies the configuration it’s concerned by</li>
+<li>The server get an application report back</li>
+</ul>
+</section><section id="benefits" class="slide level3">
+<h1>Benefits</h1>
+<ul>
+<li>Uniformity / consistency</li>
+<li>Agility / Maintainability</li>
+<li>Better infrastructure knowledge</li>
+<li>Single point of truth</li>
+<li>Reduce complexity : save time</li>
+</ul>
+</section><section id="example" class="slide level3">
+<h1>Example</h1>
+<p>Remember : manage “<strong>states</strong>” of “<strong>resources</strong>” representing a “<strong>service</strong>”</p>
+<p>Installing nginx</p>
+<pre><code>- name: &quot;Install nginx&quot;
+  pkg:
+      name: nginx
+      state: installed</code></pre>
+<p>Start the service:</p>
+<pre><code>- name: &quot;Ensure nginx is started&quot;
+  service:
+      name:   nginx
+      state:  started</code></pre>
+</section><section id="solutions" class="slide level3">
+<h1>Solutions</h1>
+<ul>
+<li>Puppet</li>
+<li>Chef</li>
+<li>Ansible</li>
+<li>Saltstack</li>
+<li>…</li>
+</ul>
+</section><section id="puppet" class="slide level3">
+<h1>Puppet</h1>
+<ul>
+<li>Needs:
+<ul>
+<li>A master server</li>
+<li>An agent on clients</li>
+</ul></li>
+<li>Reference solution</li>
+<li>Ruby</li>
+<li>2005</li>
+</ul>
+</section><section id="ansible" class="slide level3">
+<h1>Ansible</h1>
+<ul>
+<li>Needs:
+<ul>
+<li>A SSH connexion to clients</li>
+<li>Python installed on clients</li>
+</ul></li>
+<li>Easy to learn</li>
+<li>Used internally by Smile and numerous clients</li>
+<li>Python</li>
+<li>2012</li>
+</ul>
+</section><section id="saltstack" class="slide level3">
+<h1>SaltStack</h1>
+<ul>
+<li>Needs:
+<ul>
+<li>Whatever please you : a SSH connexion or an agent on clients</li>
+</ul></li>
+<li>Most complete solution</li>
+<li>Worse documentation than Ansible</li>
+<li>Harder to use</li>
+<li>Python</li>
+<li>2011</li>
+</ul>
+</section><section id="infrastructure-as-code-at-the-end" class="slide level3">
+<h1>Infrastructure as Code at the end</h1>
+<ul>
+<li>If a machine description is not stored in a git repository, you just lost the game</li>
+<li>If you can’t disable sshd on a machine, you just lost the game</li>
+</ul>
+</section></section>
+<section><section id="level-2---cloud" class="titleslide slide level1"><h1>Level 2 - Cloud</h1></section><section id="aas" class="slide level3">
+<h1>*aaS</h1>
+<ul>
+<li>IaaS</li>
+<li>PaaS</li>
+<li>SaaS</li>
+</ul>
+</section><section class="slide level3">
+
+<figure>
+<img src="images/pizza.jpg" alt="Turtle" /><figcaption>Turtle</figcaption>
+</figure>
+</section><section id="iaas-providers" class="slide level3">
+<h1>IaaS Providers</h1>
+<ul>
+<li>Amazon (AWS)</li>
+<li>Google (GCE)</li>
+<li>Microsoft (Azure)</li>
+<li>Numergy</li>
+<li>??</li>
+</ul>
+</section><section id="concepts" class="slide level3">
+<h1>Concepts</h1>
+<ul>
+<li>Pet vs Catle / Snowflake</li>
+<li>Autoscaling</li>
+<li>Self-healing</li>
+<li>Resources as a service</li>
+</ul>
+</section></section>
+<section><section id="level-3---infrastructure-immutable" class="titleslide slide level1"><h1>Level 3 - Infrastructure immutable</h1></section><section id="concepts-1" class="slide level3">
+<h1>Concepts</h1>
+<ul>
+<li>Build an image</li>
+<li>Deploy this image</li>
+<li>Change =&gt; Rebuild</li>
+</ul>
+</section><section id="hashicorp" class="slide level3">
+<h1>Hashicorp</h1>
+<figure>
+<img src="images/hashicorp.png" alt="Just works" /><figcaption>Just works</figcaption>
+</figure>
+</section><section id="cloudformation" class="slide level3">
+<h1>Cloudformation</h1>
+<pre><code>  &quot;Parameters&quot;: {
+    &quot;Region&quot;: {
+      &quot;Type&quot;: &quot;String&quot;,
+      &quot;Default&quot;: &quot;eu-west-1&quot;,
+      &quot;AllowedValues&quot;: [&quot;eu-west-1&quot;],
+      &quot;Description&quot;: &quot;Region to work with. Only eu-west-1 for now&quot;
+    },
+    &quot;InstanceType&quot;: {
+      &quot;Type&quot;: &quot;String&quot;,
+      &quot;Default&quot;: &quot;t2.micro&quot;,
+      &quot;AllowedValues&quot;: [&quot;t2.micro&quot;, &quot;t2.medium&quot;],
+      &quot;Description&quot;: &quot;Enter t2.micro or t2.medium. Default is t2.micro&quot;
+    },
+    &quot;ElasticacheRedisPort&quot;: {
+      &quot;Type&quot;: &quot;Number&quot;,
+      &quot;Default&quot;: 6379,
+      &quot;Description&quot;: &quot;Redis Elasticache connection port&quot;
+    }
+    [...]
+  },
+  &quot;Resources&quot;: {
+    &quot;sgRedisInbound&quot;: {
+      &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
+      &quot;Properties&quot;: {
+        &quot;VpcId&quot;: {
+          &quot;Ref&quot;: &quot;MainVpcId&quot;
+        },
+        &quot;SecurityGroupIngress&quot;: [{
+          &quot;IpProtocol&quot;: &quot;tcp&quot;,
+          &quot;FromPort&quot;: {&quot;Ref&quot;: &quot;ElasticacheRedisPort&quot;},
+          &quot;ToPort&quot;: {&quot;Ref&quot;: &quot;ElasticacheRedisPort&quot;},
+          &quot;CidrIp&quot;: {&quot;Ref&quot;: &quot;SubnetCidrA&quot;}
+        }],
+        &quot;SecurityGroupEgress&quot;: []
+      }
+    },
+    &quot;sgRedisOutbound&quot;: {
+      &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
+      &quot;Properties&quot;: {
+        &quot;VpcId&quot;: {
+          &quot;Ref&quot;: &quot;MainVpcId&quot;
+        },
+        &quot;SecurityGroupIngress&quot;: [],
+        &quot;SecurityGroupEgress&quot;: [{
+          &quot;IpProtocol&quot;: &quot;tcp&quot;,
+          &quot;FromPort&quot;: {&quot;Ref&quot;: &quot;ElasticacheRedisPort&quot;},
+          &quot;ToPort&quot;: {&quot;Ref&quot;: &quot;ElasticacheRedisPort&quot;},
+          &quot;CidrIp&quot;: {&quot;Ref&quot;: &quot;SubnetCidrA&quot;}
+        }]
+      }
+    },
+    &quot;sgElbInbound&quot;: {
+      &quot;Type&quot;: &quot;AWS::EC2::SecurityGroup&quot;,
+      &quot;Properties&quot;: {
+        &quot;VpcId&quot;: {
+          &quot;Ref&quot;: &quot;MainVpcId&quot;
+        },
+        &quot;SecurityGroupIngress&quot;: [{
+          &quot;IpProtocol&quot;: &quot;tcp&quot;,
+          &quot;FromPort&quot;: &quot;80&quot;,
+          &quot;ToPort&quot;: &quot;80&quot;,
+          &quot;CidrIp&quot;: {&quot;Ref&quot;: &quot;SubnetCidrA&quot;}
+        }],
+        &quot;SecurityGroupEgress&quot;: []
+      }
+    },
+    &quot;ecSubnetGroup&quot;: {
+      &quot;Type&quot;: &quot;AWS::ElastiCache::SubnetGroup&quot;,
+      &quot;Properties&quot;: {
+        &quot;CacheSubnetGroupName&quot;: { &quot;Fn::Join&quot;: [&quot;-&quot;, [&quot;connect&quot;, {&quot;Ref&quot;: &quot;Environment&quot; }, &quot;-elasticache-subnet&quot;]] },
+        &quot;SubnetIds&quot;: [{&quot;Ref&quot;: &quot;SubnetIdA&quot;}]
+      }
+    },
+    &quot;ecRedis&quot;: {
+      &quot;Type&quot;: &quot;AWS::ElastiCache::CacheCluster&quot;,
+      &quot;Properties&quot;:
+      {
+        &quot;CacheNodeType&quot;: &quot;cache.t2.micro&quot;,
+        &quot;CacheSubnetGroupName&quot;: {&quot;Ref&quot;: &quot;ecSubnetGroup&quot;},
+        &quot;ClusterName&quot;: { &quot;Fn::Join&quot;: [&quot;-&quot;, [&quot;connect&quot;, {&quot;Ref&quot;: &quot;Environment&quot; }]] },
+        &quot;Engine&quot;: &quot;redis&quot;,
+        &quot;EngineVersion&quot;: &quot;2.8.24&quot;,
+        &quot;NumCacheNodes&quot;: &quot;1&quot;,
+        &quot;Port&quot;: {&quot;Ref&quot;: &quot;ElasticacheRedisPort&quot;},
+        &quot;PreferredAvailabilityZone&quot;: {&quot;Ref&quot;: &quot;SubnetAZA&quot;},
+        &quot;VpcSecurityGroupIds&quot;: [{&quot;Ref&quot;: &quot;sgRedisInbound&quot;}]
+      }
+    },
+    &quot;ec2Instance&quot;: {
+      &quot;Type&quot;: &quot;AWS::EC2::Instance&quot;,
+      &quot;Properties&quot;: {
+        &quot;AvailabilityZone&quot;: {&quot;Ref&quot;: &quot;SubnetAZA&quot;},
+        &quot;DisableApiTermination&quot;: False,
+        &quot;IamInstanceProfile&quot;: {&quot;Ref&quot;: &quot;IamRole&quot;},
+        &quot;ImageId&quot;: {&quot;Ref&quot;: &quot;AmiId&quot;},
+        &quot;InstanceInitiatedShutdownBehavior&quot;: &quot;terminate&quot;,
+        &quot;InstanceType&quot;: {&quot;Ref&quot;: &quot;InstanceType&quot;},
+        &quot;KeyName&quot;: {&quot;Ref&quot;: &quot;KeyPair&quot;},
+        &quot;SecurityGroupIds&quot;: [ {&quot;Ref&quot;: &quot;sgRedisInbound&quot;}, {&quot;Ref&quot;: &quot;sgElbInbound&quot;}],
+        &quot;SubnetId&quot;: {&quot;Ref&quot;: &quot;SubnetIdA&quot;}
+      }</code></pre>
+</section></section>
+<section><section id="level-4---docker" class="titleslide slide level1"><h1>Level 4 - Docker</h1></section><section id="what-is-a-container" class="slide level3">
+<h1>What is a container</h1>
+<figure>
+<img src="images/containers.png" alt="containers" /><figcaption>containers</figcaption>
+</figure>
+</section><section id="linux-namespaces" class="slide level3">
+<h1>Linux namespaces</h1>
+<ul>
+<li>MNT - Mount</li>
+<li>PID - Process ID</li>
+<li>NET - Network</li>
+<li>IPC - Interprocess Communication</li>
+<li>UTS - Host and domain names</li>
+<li>UID - User ID</li>
+<li>cgroup</li>
+</ul>
+</section><section id="useful-links-for-more-details" class="slide level3">
+<h1>Useful links for more details</h1>
+<ul>
+<li><a href="http://www.haifux.org/lectures/299/netLec7.pdf" class="uri">http://www.haifux.org/lectures/299/netLec7.pdf</a></li>
+<li><a href="http://man7.org/training/sec_isol_apis/sec_isol_apis_course_outline.html" class="uri">http://man7.org/training/sec_isol_apis/sec_isol_apis_course_outline.html</a></li>
+<li><a href="http://virli.nemunai.re/" class="uri">http://virli.nemunai.re/</a></li>
+</ul>
+</section><section id="why-containers" class="slide level3">
+<h1>Why containers</h1>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 15%" />
+<col style="width: 24%" />
+<col style="width: 27%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Ships within…</th>
+<th>Manual deployment takes…</th>
+<th>Automated deployment takes…</th>
+<th>Boots in…</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bare Metal</td>
+<td>days</td>
+<td>hours</td>
+<td>minutes</td>
+<td>minutes</td>
+</tr>
+<tr class="even">
+<td>Virtualization</td>
+<td>minutes</td>
+<td>minutes</td>
+<td>seconds</td>
+<td>less than a minute</td>
+</tr>
+<tr class="odd">
+<td>Containers</td>
+<td>seconds</td>
+<td>minutes</td>
+<td>seconds</td>
+<td>seconds</td>
+</tr>
+</tbody>
+</table>
+</section><section id="what-is-docker" class="slide level3">
+<h1>What is Docker</h1>
+<ul>
+<li>Containers</li>
+<li>Ecosystem</li>
+</ul>
+</section><section id="stuff" class="slide level3">
+<h1>Stuff</h1>
+<ul>
+<li>Docker Swarm</li>
+<li>Shipyard</li>
+<li>Rancher</li>
+<li>CoreOS</li>
+<li>rkt</li>
+<li>Atomic</li>
+</ul>
+</section><section id="orchestration" class="slide level3">
+<h1>Orchestration</h1>
+<ul>
+<li>Hashicorp : Nomad</li>
+<li>Mesosphere : Mesos/Marathon</li>
+<li>Google : Kubernetes</li>
+</ul>
+<p>but : plus rien faire service autonome pager qui sonne plus qu’on puisse dormir</p>
+<p>Service discovery Consuuuul</p>
+<p>j’me fous d’où est l’intra, c’est pas mon problème, j’ai pas à connaitre son IP, j’veux juste que ça aille dessus</p>
+<p>Problème : DBs</p>
+<p>Trouver un moyen de garder une persistence. Pas vraiment de solution au niveau docker, genre pas de flag “ça c’est un data container”</p>
+<p>Vagrant : Makefile pour la VM</p>
+</section><section id="bande-de-tarés" class="slide level3">
+<h1>Bande de tarés</h1>
+<ul>
+<li>Netflix</li>
+<li>37% of USA traffic on peak hour</li>
+<li>Simian Army</li>
+<li>Full AWS</li>
+</ul>
+<p>http://techblog.netflix.com/2011/04/lessons-netflix-learned-from-aws-outage.html</p>
+<p>j’viens dans ton DC avec une batte et de l’essence et paf</p>
+<p>certifs, le dégager et regen les clés</p>
+<p>Design for failure Resilience is the key feature</p>
+<p>Plus que des outils Simplifier les usages Libre service Ouverture du SI</p>
+<p>VM qui démarre 15min plus vite, osef à la limite, on veut juste être indépendant Demain les users auront des besoins qu’on envisage pas et on aura des besoins énormes mais pour 5min</p>
+</section></section>
+<section><section id="conclusion" class="titleslide slide level1"><h1>Conclusion</h1></section><section id="another-time" class="slide level3">
+<h1>Another time</h1>
+<ul>
+<li>HA</li>
+<li>rkt</li>
+<li>Data storage</li>
+<li>Unikernel &amp; co</li>
+</ul>
+</section><section id="stuff-1" class="slide level3">
+<h1>Stuff</h1>
+<ul>
+<li>Thanks Steve “saitrex” Barrau for the first DevOps talk at GConfs</li>
+<li>https://www.youtube.com/watch?v=XCFS5D7iIM8</li>
+<li>(Ex,Future) Collegues</li>
+<li>https://github.com/Horgix/gconfs-moderninfra-infra</li>
+<li>https://github.com/Horgix/gconfs-moderninfra-slides</li>
+<li>http://thesecretlivesofdata.com/raft/</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: 'c / t',                // Display the page number of the current slide
+        theme: 'black', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
