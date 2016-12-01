@@ -29,10 +29,8 @@ slides::
 
 
 build::
-	# Build .war
-	docker run --rm -v ${BUILD_DIR}:/usr/src/click-count -w /usr/src/click-count ${MAVEN_OPTS_DOCKER} maven mvn clean package
 	# Build Docker image
-	docker build -t horgix/click-count:${CI_BUILD_REF} ${BUILD_DIR}
+	docker build -t horgix/gconfs-moderninfra:${CI_BUILD_REF} .
 
 deploy::
 	# Poor templating
