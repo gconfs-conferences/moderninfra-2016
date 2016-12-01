@@ -1,4 +1,4 @@
-% Modern infrastructure, automation, whales and stuff
+% Modern infrastructure, automation, whales and stuff LOL
 % Alexis "Horgix" Chotard
 % 01 décembre 2016
 
