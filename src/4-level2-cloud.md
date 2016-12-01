@@ -16,11 +16,11 @@
 - Google (GCE)
 - Microsoft (Azure)
 - Numergy
-- ??
+- ...
 
 ### Concepts
 
 - Pet vs Catle / Snowflake
 - Autoscaling
-- Self-healing
 - Resources as a service
+- Self-healing

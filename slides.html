@@ -75,8 +75,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li><a href="#/introduction">Introduction</a></li>
 <li><a href="#/devops">DevOps</a></li>
-<li><a href="#/testingci">Testing/CI</a></li>
-<li><a href="#/automatisation">Automatisation</a></li>
 <li><a href="#/level-0---ssh">Level 0 - SSH</a></li>
 <li><a href="#/level-1---automation">Level 1 - Automation</a></li>
 <li><a href="#/level-2---cloud">Level 2 - Cloud</a></li>
@@ -86,7 +84,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </section>
 
-<section><section id="introduction" class="titleslide slide level1"><h1>Introduction</h1></section><section id="buzzwords" class="slide level3">
+<section><section id="introduction" class="titleslide slide level1"><h1>Introduction</h1></section><section id="myself-and-i" class="slide level3">
+<h1>Myself and I</h1>
+<ul>
+<li>Horgix</li>
+<li>Epita 2015</li>
+</ul>
+</section><section id="buzzwords" class="slide level3">
 <h1>Buzzwords</h1>
 <ul>
 <li><strong>DevOps</strong> (DevOups)</li>
@@ -101,6 +105,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>En vrai l’admin sys c’est intéressant</li>
 <li>On m’a dit qu’il y aurait des bières mais c’est faux</li>
 <li>Afin que vous puissiez vous aussi dormir pendant que votre infra fait sa vie</li>
+</ul>
+</section><section id="follow-it" class="slide level3">
+<h1>Follow it</h1>
+<ul>
+<li>https://slides.deploy.coffee</li>
 </ul>
 </section></section>
 <section><section id="devops" class="titleslide slide level1"><h1>DevOps</h1></section><section id="syndrômes" class="slide level3">
@@ -118,7 +127,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Problème organisationel avant d’être technique</li>
 <li>Culture</li>
 <li>Agile</li>
-<li>Vous voulez des détails ?</li>
 </ul>
 </section><section id="prérequis" class="slide level3">
 <h1>Prérequis</h1>
@@ -133,8 +141,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Equipes ops/dev séparées</li>
 <li>Manque de communication</li>
-<li>Over-process</li>
+<li>Over-process ou inexistants</li>
 <li>Manque de confiance du métier en l’IT</li>
+<li>Chacun garde son bout de process dans un coin pour le faire évoluer comme il veut</li>
 </ul>
 </section><section id="code" class="slide level3">
 <h1>Code</h1>
@@ -173,6 +182,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Réduction des cycles de livraison (automatisation)</li>
 <li>Amélioration de la qualité (CI, tests, metrics)</li>
 <li>Nouvelle culture (amélioration basée sur l’apprentissage continu)</li>
+<li>Accélération du Time To Market</li>
+<li>Accélération des résolutions d’incidents (MTTR, Mean Time To Repair)</li>
+<li>Industrialisation des déploiements</li>
 </ul>
 </section><section id="vision-positive-de-léchec" class="slide level3">
 <h1>Vision positive de l’échec</h1>
@@ -201,79 +213,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Partage des responsabilités</li>
 </ul></li>
 </ul>
-</section></section>
-<section><section id="testingci" class="titleslide slide level1"><h1>Testing/CI</h1></section><section id="en-pratique" class="slide level3">
-<h1>En pratique</h1>
+</section><section id="misc" class="slide level3">
+<h1>Misc</h1>
 <ul>
-<li>Iso prod → ça marche en preprod → c’est safe, go live</li>
-</ul>
-<p><strong>Mais :</strong></p>
-<p>La stratégie de recette et de tests :</p>
-<ul>
-<li>… est rarement partagée</li>
-<li>… n’est pas toujours définie clairement</li>
-<li>… n’est pas toujours ni rigoureusement respectée</li>
-</ul>
-<p>→ nuit à la crédibilité du résultat</p>
-</section><section id="challenges" class="slide level3">
-<h1>Challenges :</h1>
-<ul>
-<li>Avoir les outils</li>
-<li>Obtenir des environnements ISO prod dans des délais raisonnables</li>
-<li><p>Garantir l’intégrité des tests et des résultats rapides</p></li>
-<li>Une collaboration qui fonctionne ne doit pas être mise en péril par une agrandissement de l’équipe ou un changement des personnes impliquées</li>
-<li><p>Structuration du processus autour de l’automatisation → créer un cadre dans lequel on pourra inclure les nouveaux arrivants</p></li>
-</ul>
-</section><section class="slide level3">
-
-</section></section>
-<section><section id="automatisation" class="titleslide slide level1"><h1>Automatisation</h1></section><section id="problématique-initiale" class="slide level3">
-<h1>Problématique initiale</h1>
-<ul>
-<li>Processus rarement définis</li>
-<li>Chacun garde son bout de process dans un coin pour le faire évoluer comme il veut</li>
-</ul>
-</section><section id="objectifs" class="slide level3">
-<h1>Objectifs</h1>
-<ul>
+<li>Testing / CI</li>
 <li>Accélération du provisionning → Gagner du temps !</li>
 <li>Fiabilisation des déploiements</li>
 <li>Automatisation, systématisation des tests</li>
-</ul>
-</section><section id="définition" class="slide level3">
-<h1>Définition</h1>
-<p>Automatiser ≠ optimiser</p>
-<ul>
-<li>Rendre systématique</li>
-<li>… à l’aide d’outils technologiques</li>
-<li>… un <strong>enchainement d’activités</strong> spécifiques</li>
-<li>Pas forcément optimisé ou industrialisé !</li>
-</ul>
-<p>ENSUITE : identifier et enlever les étapes inutiles et optimiser la chaine d’activités pour tendre vers du continuous delivery</p>
-</section><section id="tâches-concernées" class="slide level3">
-<h1>Tâches concernées</h1>
-<ul>
-<li>Tâches répétitives à faible valeur ajoutée</li>
-<li><p>Tâches plus complexes techniquement, succeptibles d’introduire des erreurs d’innatention !</p></li>
-<li>Notion même de valeur ajoutée qui peut faire l’objet d’un débat !</li>
-<li>Personne n’aime voir son travail dévalorisé</li>
-<li><p>→ définition complexe</p></li>
-</ul>
-</section><section class="slide level3">
-
-<p>Tâches les plus pénibles :</p>
-<ul>
-<li>Chronophages</li>
-<li>Sans intérêt intellectuel particulier</li>
-<li>Complexes et éprouvantes</li>
-</ul>
-<p>→ Tâches susceptibles de générer des erreurs et de générer de la tension entre les partenaires. Ex : mise en prod (CF Hosting)</p>
-</section><section id="accelerated-delivery" class="slide level3">
-<h1>Accelerated delivery</h1>
-<ul>
-<li>Accélération du Time To Market</li>
-<li>Accélération des résolutions d’incidents (MTTR, Mean Time To Repair)</li>
-<li>Industrialisation des déploiements</li>
 </ul>
 </section><section id="please" class="slide level3">
 <h1>Please</h1>
@@ -292,7 +238,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Concept</h1>
 <ul>
 <li>…</li>
-<li>man</li>
+<li>man systemctl</li>
+<li>man you_package_manager</li>
 <li>NOOOO</li>
 </ul>
 </section></section>
@@ -308,6 +255,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </section><section id="philosophy" class="slide level3">
 <h1>Philosophy</h1>
 <ul>
+<li>Automatiser ≠ optimiser</li>
 <li>Stop doing everything by hand; describe it in <strong>text files</strong> instead</li>
 <li>Define infrastructure “as code”</li>
 <li>Manage “<strong>states</strong>” of “<strong>resources</strong>” representing a “<strong>service</strong>”</li>
@@ -421,15 +369,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Google (GCE)</li>
 <li>Microsoft (Azure)</li>
 <li>Numergy</li>
-<li>??</li>
+<li>…</li>
 </ul>
 </section><section id="concepts" class="slide level3">
 <h1>Concepts</h1>
 <ul>
 <li>Pet vs Catle / Snowflake</li>
 <li>Autoscaling</li>
-<li>Self-healing</li>
 <li>Resources as a service</li>
+<li>Self-healing</li>
 </ul>
 </section></section>
 <section><section id="level-3---infrastructure-immutable" class="titleslide slide level1"><h1>Level 3 - Infrastructure immutable</h1></section><section id="concepts-1" class="slide level3">
@@ -547,6 +495,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         &quot;SecurityGroupIds&quot;: [ {&quot;Ref&quot;: &quot;sgRedisInbound&quot;}, {&quot;Ref&quot;: &quot;sgElbInbound&quot;}],
         &quot;SubnetId&quot;: {&quot;Ref&quot;: &quot;SubnetIdA&quot;}
       }</code></pre>
+</section><section id="packer" class="slide level3">
+<h1>Packer</h1>
+<pre><code>{
+  &quot;variables&quot;: {
+    &quot;aws_access_key&quot;: &quot;&quot;,
+    &quot;aws_secret_key&quot;: &quot;&quot;
+  },
+  &quot;builders&quot;: [{
+    &quot;type&quot;: &quot;amazon-ebs&quot;,
+    &quot;access_key&quot;: &quot;{{user `aws_access_key`}}&quot;,
+    &quot;secret_key&quot;: &quot;{{user `aws_secret_key`}}&quot;,
+    &quot;region&quot;: &quot;us-east-1&quot;,
+    &quot;source_ami&quot;: &quot;ami-fce3c696&quot;,
+    &quot;instance_type&quot;: &quot;t2.micro&quot;,
+    &quot;ssh_username&quot;: &quot;ubuntu&quot;,
+    &quot;ami_name&quot;: &quot;packer-example {{timestamp}}&quot;
+  }]
+}</code></pre>
+</section><section class="slide level3">
+
+<pre><code>$ packer build \
+    -var &#39;aws_access_key=YOUR ACCESS KEY&#39; \
+    -var &#39;aws_secret_key=YOUR SECRET KEY&#39; \
+    example.json
+==&gt; amazon-ebs: amazon-ebs output will be in this color.
+
+==&gt; amazon-ebs: Creating temporary keypair for this instance...
+==&gt; amazon-ebs: Creating temporary security group for this instance...
+==&gt; amazon-ebs: Authorizing SSH access on the temporary security group...
+==&gt; amazon-ebs: Launching a source AWS instance...
+==&gt; amazon-ebs: Waiting for instance to become ready...
+==&gt; amazon-ebs: Connecting to the instance via SSH...
+==&gt; amazon-ebs: Stopping the source instance...
+==&gt; amazon-ebs: Waiting for the instance to stop...
+==&gt; amazon-ebs: Creating the AMI: packer-example 1371856345
+==&gt; amazon-ebs: AMI: ami-19601070
+==&gt; amazon-ebs: Waiting for AMI to become ready...
+==&gt; amazon-ebs: Terminating the source AWS instance...
+==&gt; amazon-ebs: Deleting temporary security group...
+==&gt; amazon-ebs: Deleting temporary keypair...
+==&gt; amazon-ebs: Build finished.
+
+==&gt; Builds finished. The artifacts of successful builds are:
+--&gt; amazon-ebs: AMIs were created:
+
+us-east-1: ami-19601070</code></pre>
 </section></section>
 <section><section id="level-4---docker" class="titleslide slide level1"><h1>Level 4 - Docker</h1></section><section id="what-is-a-container" class="slide level3">
 <h1>What is a container</h1>
@@ -637,28 +631,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Mesosphere : Mesos/Marathon</li>
 <li>Google : Kubernetes</li>
 </ul>
-<p>but : plus rien faire service autonome pager qui sonne plus qu’on puisse dormir</p>
-<p>Service discovery Consuuuul</p>
-<p>j’me fous d’où est l’intra, c’est pas mon problème, j’ai pas à connaitre son IP, j’veux juste que ça aille dessus</p>
-<p>Problème : DBs</p>
-<p>Trouver un moyen de garder une persistence. Pas vraiment de solution au niveau docker, genre pas de flag “ça c’est un data container”</p>
-<p>Vagrant : Makefile pour la VM</p>
-</section><section id="bande-de-tarés" class="slide level3">
-<h1>Bande de tarés</h1>
+</section></section>
+<section><section id="conclusion" class="titleslide slide level1"><h1>Conclusion</h1></section><section id="netflix" class="slide level3">
+<h1>Netflix</h1>
 <ul>
-<li>Netflix</li>
 <li>37% of USA traffic on peak hour</li>
 <li>Simian Army</li>
 <li>Full AWS</li>
 </ul>
-<p>http://techblog.netflix.com/2011/04/lessons-netflix-learned-from-aws-outage.html</p>
-<p>j’viens dans ton DC avec une batte et de l’essence et paf</p>
-<p>certifs, le dégager et regen les clés</p>
-<p>Design for failure Resilience is the key feature</p>
-<p>Plus que des outils Simplifier les usages Libre service Ouverture du SI</p>
-<p>VM qui démarre 15min plus vite, osef à la limite, on veut juste être indépendant Demain les users auront des besoins qu’on envisage pas et on aura des besoins énormes mais pour 5min</p>
-</section></section>
-<section><section id="conclusion" class="titleslide slide level1"><h1>Conclusion</h1></section><section id="another-time" class="slide level3">
+<p><a href="http://techblog.netflix.com/2011/04/lessons-netflix-learned-from-aws-outage.html" class="uri">http://techblog.netflix.com/2011/04/lessons-netflix-learned-from-aws-outage.html</a></p>
+</section><section id="take-away" class="slide level3">
+<h1>Take away</h1>
+<ul>
+<li>We don’t want to have anything to do</li>
+<li>Autonomous services</li>
+<li>No personnal infrastructure knowledge</li>
+<li>Design for failure</li>
+<li>Resilience is the key feature</li>
+<li>More than just tools</li>
+</ul>
+</section><section id="another-time" class="slide level3">
 <h1>Another time</h1>
 <ul>
 <li>HA</li>
@@ -670,11 +662,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>Stuff</h1>
 <ul>
 <li>Thanks Steve “saitrex” Barrau for the first DevOps talk at GConfs</li>
-<li>https://www.youtube.com/watch?v=XCFS5D7iIM8</li>
+<li><a href="https://www.youtube.com/watch?v=XCFS5D7iIM8" class="uri">https://www.youtube.com/watch?v=XCFS5D7iIM8</a></li>
 <li>(Ex,Future) Collegues</li>
-<li>https://github.com/Horgix/gconfs-moderninfra-infra</li>
-<li>https://github.com/Horgix/gconfs-moderninfra-slides</li>
-<li>http://thesecretlivesofdata.com/raft/</li>
+<li><a href="https://github.com/Horgix/gconfs-moderninfra-infra" class="uri">https://github.com/Horgix/gconfs-moderninfra-infra</a></li>
+<li><a href="https://github.com/Horgix/gconfs-moderninfra-slides" class="uri">https://github.com/Horgix/gconfs-moderninfra-slides</a></li>
+<li><a href="http://thesecretlivesofdata.com/raft/" class="uri">http://thesecretlivesofdata.com/raft/</a></li>
 </ul>
 </section></section>
     </div>

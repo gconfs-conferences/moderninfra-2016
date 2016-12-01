@@ -14,6 +14,7 @@ server, modify it, and it's done !
 
 ### Philosophy
 
+* Automatiser ≠ optimiser
 * Stop doing everything by hand; describe it in **text files** instead
 * Define infrastructure "as code"
 * Manage "**states**" of "**resources**" representing a "**service**"

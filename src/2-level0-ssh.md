@@ -3,5 +3,6 @@
 ### Concept
 
 - ...
-- man
+- man systemctl
+- man you\_package\_manager
 - NOOOO
